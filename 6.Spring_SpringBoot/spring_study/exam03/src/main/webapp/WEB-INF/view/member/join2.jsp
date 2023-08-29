@@ -9,14 +9,14 @@
 --%>
 
 <form:form method="POST" action="${action}" modelAttribute="joinForm">
-
+    <form:errors />
     <dl>
         <dt>
             <spring:message code="member.userId" />
         </dt>
         <dd>
             <form:input path="userId" cssErrorClass="error" />
-            <form:errors path="userId" element="div" delimiter="<p>*****</p>" />
+            <form:errors path="userId" element="div" delimiter="<p>*****</p>"/>
         </dd>
     </dl>
     <dl>
@@ -55,13 +55,13 @@
         </dd>
     </dl>
     <dl>
-         <dt>
+        <dt>
             <spring:message code="member.mobile" />
-         </dt>
-         <dd>
+        </dt>
+        <dd>
             <form:input path="mobile" />
             <form:errors path="mobile" element="div" />
-         </dd>
+        </dd>
     </dl>
     <div>
         <form:checkbox path="agree" value="true" label="${agree}" />

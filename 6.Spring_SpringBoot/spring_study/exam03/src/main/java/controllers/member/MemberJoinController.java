@@ -2,6 +2,7 @@ package controllers.member;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import models.member.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -19,6 +20,8 @@ public class MemberJoinController {
 
     private final JoinValidator joinValidator;
 
+    private final JoinService joinService;
+
     @GetMapping // /member/join
     public String join(@ModelAttribute JoinForm joinForm, Model model){
 
@@ -33,6 +36,8 @@ public class MemberJoinController {
         if(errors.hasErrors()){ // reject, rejectValue -> true
             return "member/join2";
         }
+
+        joinService.join(form);
 
         return "redirect:/member/login";
     }

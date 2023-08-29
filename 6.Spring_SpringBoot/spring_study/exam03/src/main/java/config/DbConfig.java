@@ -30,6 +30,7 @@ public class DbConfig {
         return new DataSourceTransactionManager(dataSource());
     }
 
+    @Bean
     public JdbcTemplate jdbcTemplate(){
         return new JdbcTemplate(dataSource());
     }
