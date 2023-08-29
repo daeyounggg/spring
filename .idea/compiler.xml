@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/4.Servlet &amp; JSP/web_study/day03/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/4.Servlet &amp; JSP/web_study/day05/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/4.Servlet &amp; JSP/web_study/day01_2/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/6.Spring_SpringBoot/spring_study/exam01/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/6.Spring_SpringBoot/spring_study/exam02/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/6.Spring_SpringBoot/spring_study/exam03/src/main/resources/archetype-resources" includeSubdirectories="true" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="day03" />
+        <module name="exam03" />
+        <module name="day01" />
+        <module name="exam01" />
+        <module name="exam02" />
+        <module name="day01_2" />
+        <module name="day05" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
