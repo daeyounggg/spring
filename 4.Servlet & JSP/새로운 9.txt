@@ -1,0 +1,8 @@
+1. servlet-api
+2. servlet.jsp-api
+3. jstl-api
+3. jstl impl
+4. mysql driver
+5. mybatis
+5. slf4j api + logback classic
+6. lombok 

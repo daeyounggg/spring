@@ -1,0 +1,109 @@
+내장함수
+
+숫자 함수
+1. ABS(숫자)
+	- 절대값 
+2. CEIL(숫자)
+	- 올림
+3. FLOOR(숫자)
+	- 버림
+4. ROUND(숫자, m)
+	- 반올림
+5. POWER(숫자, n)	
+	- 숫자 n승
+	POWER(2, 3) -> 2^3 -> 8
+6. SQRT(숫자)
+
+7. SIGN(숫자)
+	- 부호(음수 -1, 양수 1, 0)
+
+문자함수
+1. CONCAT(s1, s2)
+	CONCAT(...str)
+		- 결합
+2. LOWER(s)
+	- 대문자 -> 소문자
+
+3. LPAD(s,n,c)
+	-> s의 문자열 길이가 n 미만일때 왼쪽부터 c 문자로 채워넣기
+	
+4. REPLACE(s1, s2, s3)
+	- s1에서 s2를 s3으로 변경
+
+5. RPAD(s,n,c)
+	-> s의 문자열 길이가 n 미만일때 오른쪽부터 c 문자로 채워넣기
+
+6. SUBSTR(s,n,k)
+	- s문자열을 n번 위치부터 k개 잘라내기
+	- 위치에 숫자 1번부터 시작
+	
+7. TRIM(c FROM s)
+	- 
+	
+8. UPPER(s)
+	- 소문자 ->  대문자
+	
+9. ASCII(c)
+	- 문자 -> 아스키 코드
+	
+10. LENGTH(s)
+	-> 바이트 수 (한글 1자 - 3바이트, 공백 - 1바이트)
+		예) 가A나 : 7
+	
+11. CHAR_LENGTH(s)
+	-> 문자의 갯수
+	예) 가A나 -> 3
+	
+	참고)
+		오라클
+			LENGTH() : 문자의 갯수
+			LENGTHB() : 바이트 수
+
+날짜,시간 함수
+- 날짜 : 기본 형식(ISO) : 문자열 -> 날짜 자동 변환
+1. STR_TO_DATE(string, format)
+	-> 문자열 형식 날짜 -> 날짜 
+	
+2. DATE_FORMAT(date, format)
+	- 날짜 -> 형식화된 문자열 
+	
+3. ADDDATE(date, interval)
+						INTERVAL 10 DAY -> 10일 후
+						INTERVAL -10 DAY -> 10일 전 
+	
+4. DATE(date)
+	-> 날짜와 시간 -> 날짜 부분만 반환 
+	
+5. DATEDIFF(date1, date2)
+	-> date1, date2의 날짜의 차이(일수)       
+
+6. SYSDATE() : 현재 시스텝의 날짜와 시간
+
+NULL 값처리
+- 값이 없음
+- 연산 불가능
+'
+1. NULL 값에 대한 연산과 집계 함수
+	- NULL은 연산 X -> 집계 함수에서 제외
+
+2. NULL 값을 확인하는 방법
+	비교연산 X
+	IS NULL : 값이 NULL일때 참
+	IS NOT NULL : 값이 NULL이 아닐때 참고
+	
+	참고)
+		오라클
+			NULL, " (빈값) , -> 값
+			
+3. IFNULL 
+		컬럼에 NULL인 값을 기본값으로 대체
+		IFNULL (칼럼명, '컬럼명이 NULL일때 대체할 값')
+
+행번호 출력
+
+	SET 변수명:= 값;
+		
+		변수명 앞에 @
+	SET @SEQ:= 0;
+
+1. SET := 기호	

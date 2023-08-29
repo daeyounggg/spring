@@ -1,0 +1,29 @@
+생성자간 상속
+
+1. 생성자 함수의  prototype 객체의 상속 
+
+class 구문
+	- class를 가장한 생성자 함수 객체
+	
+	ES6 - 클래스 또는 객체 내에서 함수의 축약표현
+		this.getArea = function(){
+		
+		}
+		
+		getArea() {
+		
+		}
+		
+정보은닉 - 캡슐화
+
+
+setter와 getter 
+
+	set 메서드 : setter
+	
+	get 메서드 : getter
+	
+	메서드 : 축약표현
+	
+	-> 완전한 정보 은닉 X
+	-> 완전한 정보 은닉을 위해서 즉시 실행 함수를 응용

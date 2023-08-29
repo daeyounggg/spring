@@ -1,0 +1,189 @@
+1. JSP의 특징
+1) JSP는 서블릿 기술의 확장
+2) JSP는 유지 관리가 용이
+3) JSP는 빠른 개발이 가능
+4) JSP로 개발하면 코드 길이를 줄일 수 있다.
+
+2. JSP의 페이지 처리과정
+hello.jsp -> hello_jsp.java -> hello_jsp.class -> 생성 
+
+3. JSP 생명 주기
+_jspInit() - 한번만 호출
+
+_jspService(HttpServletRequest request, HttpServletReponse response) : 매 요청마다 호출
+- jsp 패키지에 작성 소스의 대부분은 _jspService 지역안에 번역 된다
+
+_jspDestroy() - 객체 소멸 직전에 호출 
+
+4. 스크립트 태그
+1) 선언문
+<%!
+	자바코드...
+%>
+- 클래스명 바로 아래쪽에 번역
+- 정의하는 변수는 모두 멤버 변수(인스턴스 변수)
+
+2) 스크립틀릿
+<%
+	자바코드...
+%>
+- 번역 위치가 _jspService 지역 내부
+- 정의하는 변수는 모두 지역변수
+- 함수,메서드 정의 X
+
+3) 표현문 
+<%= 변수%>
+
+out.print(변수);
+
+5. 디렉티브 태그
+- JSP 페이지를 어떻게 처리할 것인지를 설정하는 태그
+- <%@ ... %>
+
+1) page : JSP 페이지에 대한 정보 설정
+<%@ page 속성명="값" 속성명="값" %>
+
+2) include
+- 페이지 출력 결과물을 물리적으로 번역된 서블릿 추가
+<%@ include file = "jsp페이지, text, html ... " %>
+3) taglib
+
+1. 디렉티브 태그
+- JSP 페이지를 어떻게 처리할 것인지를 설정하는 태그 
+- <%@ ... %>
+1) page : JSP 페이지에 대한 정보 설정 
+<%@ page 속성명="값" 속성명="값" %>
+
+2) include
+- 페이지 출력 결과물을 물리적으로 번역된 서블릿 추가
+<%@ include file="jsp페이지, text, html ..." %>
+
+3) taglib
+	JSTL(JSP Standard Tag Library) : 태그 형태의 편의 라이브러리
+		core 라이브러리
+			3.0
+			uri="jakarta.tags.core"
+			
+			1.2
+			uri="http://java.sun.com/jsp/jstl/core"
+		fmt 라이브러리 
+			3.0
+			uri="jakarta.tags.fmt"
+			
+			1.2
+			uri="http://java.sun.com/jsp/jstl/fmt"
+		functions 라이브러리
+			3.0 
+			uri="jakarta.tags.functions"
+			
+			1.2
+			uri="http://java.sun.com/jsp/jstl/functions"
+		sql (X)
+		
+	servlet 6.0
+	JSTL 3.0  
+		- JSTL API
+		- JSTL Implemetation 
+	
+	
+	JSTL 1.2
+	
+2. JSP의 주석 처리
+<%-- 주석... --%>
+- JSP 번역이 되지 않으므로 : 프로그램 실행 배제
+(JSP -> 서블릿 번역)
+
+참고)
+//
+/*  ~ */
+(컴파일러가 class 파일을 생성할때 그때 배제) 
+- JSP가 번역해서 서블릿 클래스에 추가
+
+7. 내장 객체(_jspService에 정의된 지역 변수
+HttpServletRequest request : 요청관련 정보, 기능
+HttpServletResponse response : 응답 관련 정보, 기능
+PageContext pageContext : JSP 페이지의 환경 정보 + 기능 
+ServletContext application : 애플리케이션 환경에 정보 + 기능
+ServletConfig config : 서블릿 설정
+HttpSession session : 개인화된 서비스 구현 기술 중 하나
+Object page = this 
+JspWriter out 
+Throwable exception / page : 디렉티브에 isErrorPage ="true"
+
+액션태그
+- 액션 태그는 서버나 클라이언트에게 어떤 행동을 하도록 명령하는 태그
+- 스크립트 태그, 주석, 디렉티브 태그와 함게 JSP 페이지를 구성하는 태그
+- 커스텀 태그의 일종
+- <jsp:... />
+
+액션태그의 종류
+1. forward 액션 태그의 기능과 사용법
+	- 버퍼의 통제로 페이지 교체 
+	- page="JSP 페이지, 텍스트, HTML, 서블릿 경로"
+	- 요청을 처리하는 과정 중에 기존 버퍼를 취소하고 현재 버퍼로 교체
+	참고)
+		실 페이지 이동  HttpServletResponse::sendRedirect("주소")
+
+2. include 액션 태그의 기능과 사용법
+	- 버퍼의 통제로 페이지 추가
+	- page="JSP 페이지, 텍스트, HTML, 서블릿 경로"
+	-  요청을 처리하는 과정 중에 버퍼에 추가 
+	
+	참고)
+		디렉티비 태그 <%@ include %>와 차이점이 있다!
+		
+		
+
+3. include 액션 태그와 include 디렉티브 태그의 차이
+4. param 액션 태그의 기능과 사용법
+	- forward, include가 요청 처리 중에 버퍼에 추가 되므로 요청 데이터로 값을 추가 
+
+
+RequestDispatcher : HttpServletRequest::getRequestDispatcher("페이지 경로")...
+	- forward(HttpServletRequest, HttpServletResponse) : <jsp:forward ... />
+	- include(HttpServletRequest, HttpServletResponse) : <jsp:include ... />
+	
+
+5. 자바빈즈 액션 태그의 기능과 사용법
+1) 자바빈즈 :  데이터 표현을 목적으로 하는 자바 클래스
+					DTO(Data Transfer Object)
+					VO(Value Object)
+2) 자바빈즈 작성 규칙
+3) useBean 액션 태그로 자바빈즈 사용하기
+<jsp:useBean id="식별이름" class="패키지명을 포함한 클래스명" scope="" />
+
+scope - page  : PageContext : 기본값
+		   request : HttpServletRequest
+ 		   session : HttpSession
+		   application : ServletContext
+
+- class에 명시된 클래스가 객체로 생성 
+- 식별 이름이 참조 변수 
+- 기본 생성자로만 객체를 생성 
+- 반드시 기본 생성자가 정의 되어 있어야 정상 동작
+
+4) setProperty 액션 태그로 프로퍼티 값 저장하기
+<jsp:setProperty name="bean 식별 이름" property="속성명" value="값" />
+
+5) getProperty 액션 태그로 프로퍼티의 값 가져오기
+<jsp:getProperty name="bean 식별 이름" property="속성명" />
+
+
+속성을 관리하는 내장 객체
+- EL식 변수로 접근 바로 할 수 있는 값
+
+PageContext pageContext 
+HttpServletRequest request 
+HttpSession session
+ServletContext application
+
+	void setAttribute(String name, Object value); : 속성값을 설정
+	Object getAttribute(String name); : 속성값을 조회
+	void removeAttribute(String name); : 속성값을 제거
+	
+참고)
+	JSP 
+		EL식 (Expression Language) 
+			- 연산식, 속성을 변수로 사용
+			- 번역 기술 
+				jakarta.servlet.jsp.el 

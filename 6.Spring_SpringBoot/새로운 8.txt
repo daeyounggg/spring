@@ -1,0 +1,16 @@
+스프링 웹 MVC
+1. 세션
+2. 인터셉터
+
+HandlerInterceptor 인터페이스
+
+1) boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception;
+2) void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception;
+3) void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception;
+
+Ant 경로 패턴
+1) * 
+2) ? 
+3) ** 
+
+3. 쿠키

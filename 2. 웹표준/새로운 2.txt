@@ -1,0 +1,19 @@
+네이티브 객체 (ECMAScript) 
+	내장 생성자 객체 
+	
+	내장 객체 
+	
+호스트 객체 : 런타임 환경에 따른 객체
+	웹브라우저 객체 
+		window
+		
+			location
+			history
+			screen
+			navigator
+			
+			document
+			
+		XMLHttpRequest 생성자 : ajax
+		FormData
+		...
