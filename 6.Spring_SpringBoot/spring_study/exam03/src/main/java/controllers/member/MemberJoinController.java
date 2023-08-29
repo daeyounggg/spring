@@ -64,6 +64,7 @@ public class MemberJoinController {
 
         return hobbies;
     }
+
     /*
     @InitBinder
     public void InitBinder(WebDataBinder binder){
