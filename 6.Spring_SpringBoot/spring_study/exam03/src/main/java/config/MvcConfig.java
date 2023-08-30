@@ -3,6 +3,7 @@ package config;
 import config.interceptors.MemberOnlyInterceptor;
 import controllers.member.JoinValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +20,8 @@ import java.util.ResourceBundle;
 @EnableWebMvc
 @Import(DbConfig.class)
 public class MvcConfig implements WebMvcConfigurer {
+    @Value("${file.upload.path}")
+    private String uploadPath;
 
     /*
     @Autowired
@@ -60,6 +63,9 @@ public class MvcConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+
+        registry.addResourceHandler("/upload/**")
+                .addResourceLocations("file:///" + uploadPath);
     }
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
