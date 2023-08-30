@@ -1,5 +1,6 @@
 package config;
 
+import config.interceptors.MemberOnlyInterceptor;
 import controllers.member.JoinValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -25,6 +26,17 @@ public class MvcConfig implements WebMvcConfigurer {
         return joinValidator;
     }
     */
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(memberOnlyInterceptor())
+                .addPathPatterns("/mypage/**");
+    }
+    @Bean
+    public MemberOnlyInterceptor memberOnlyInterceptor(){
+        return new MemberOnlyInterceptor();
+    }
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
