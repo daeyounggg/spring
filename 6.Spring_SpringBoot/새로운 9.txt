@@ -1,0 +1,19 @@
+스프링 웹 MVC
+1. 날짜 값 변환
+@DateTimeFormat
+	- pattern
+
+에러코드 : typeMismatch	
+	
+2. @PathVariable : 경로 변수
+
+3. 익셉션 처리
+@ExceptionHandler 
+	- 요청 메서드의 주입 가능한 객체
+	1) 발생한 예외 객체
+	2) Model
+	3) HttpServletRequest
+	4) HttpServletResponse
+	5) HttpSession
+	
+@ControllerAdvice
