@@ -1,24 +1,37 @@
 package restcontrollers;
 
+import commons.CommonException;
 import controllers.member.JoinForm;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import models.member.DuplicateMemberException;
+import models.member.JoinService;
 import models.member.Member;
 import models.member.MemberDao;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberDao memberDao;
+    private final JoinService joinService;
 
     @GetMapping("/{id}")
-    public Member info(@PathVariable("id") String userId) {
+    public ResponseEntity<JSONData<Member>> info(@PathVariable("id") String userId) {
         Member member = memberDao.get(userId);
-
-        return member;
+        JSONData<Member> data = new JSONData<>();
+        data.setSuccess(true);
+        data.setData(member);
+        return ResponseEntity.ok(data);
     }
 
     @GetMapping("/list")
@@ -40,8 +53,34 @@ public class MemberController {
         System.out.println("Hello!!!");
     }
 
+    /*
     @PostMapping("/register")
-    public void register(JoinForm form){
-        System.out.println(form);
+    public ResponseEntity<Object> register(@RequestBody JoinForm form){
+
+        joinService.join(form);
+
+       // return ResponseEntity.status(HttpStatus.CREATED).build();
+       // return ResponseEntity.status(HttpStatus.CREATED).build(form);
+
+        return ResponseEntity.created(URI.create("/member/login")).build();
     }
+     */
+
+    @PostMapping("/register")
+    public ResponseEntity<Object> register(@RequestBody @Valid JoinForm form, Errors errors, HttpServletResponse response) {
+        response.setContentType("application/json;charset=UTF-8");
+
+        if (errors.hasErrors()) {
+            String messages = errors.getAllErrors()
+                    .stream().map(o -> o.getDefaultMessage())
+                    .collect(Collectors.joining(","));
+
+           throw new RuntimeException(messages);
+        }
+
+        joinService.join(form); // DuplicateMemberException -> CommonException
+
+        return ResponseEntity.created(URI.create("/member/login")).build();
+        }
+
 }
