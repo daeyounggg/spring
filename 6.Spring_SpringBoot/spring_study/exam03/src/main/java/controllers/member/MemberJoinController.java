@@ -25,7 +25,10 @@ public class MemberJoinController {
     @GetMapping // /member/join
     public String join(@ModelAttribute JoinForm joinForm, Model model){
 
-        return "member/join2";
+        joinForm.setUserId("user99");
+        joinForm.setUserNm("사용자99");
+
+        return "member/join";
     }
 
     @PostMapping
