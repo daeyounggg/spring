@@ -22,6 +22,8 @@ public class MembersController {
     public String list2(Model model) {
         List<Member> members = memberDao.getList();
         model.addAttribute("members", members);
+        model.addAttribute("menuCode", "member");
+
 
         return "member/list";
     }
