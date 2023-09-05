@@ -65,6 +65,7 @@
 	참고)
 		JSTL:
 		<c:forEach varStatus="status"
+
 5. th:if, th:unless 
 	
 	th:unless="${...}" : ${...} 조건을 반대로 바꿔주는 조건식 
@@ -74,15 +75,24 @@
 	
 	조건식에 사용 가능한 상수 : true, false
 7. th:href, th:src ...
-
+	th:name, th:id ...
+	th:type ...
+	
 8. th:object : 선택 변수식 
  
 9. th:classappend 
 	- 특정 조건하에서 클래스 속성을 추가하고 제거
 
 스프링 MVC 폼과 에러 메시지 연동
-1. #fields.errors(..)
-2. #fields.globalErrors(..)
+1. #fields.errors(..) : 배열 : errors.rejectValue(필드명, 에러코드) - 필드 오류
+2. #fields.globalErrors(..) : errors.reject(에러코드) - 커맨드 객체 자체 오류
+	= #fields.errors('global');
+
+
+10. th:field
+
+참고)
+<form:errors path="필드명" />
 
 
 타임리프 페이지 레이아웃
@@ -91,3 +101,7 @@ th:replace
 	
 th:fragment
 	- 치환될 부분 HTML이 정의된 영역 
+	
+	
+참고)
+	<jsp:include ... 
