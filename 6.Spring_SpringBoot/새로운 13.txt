@@ -14,3 +14,9 @@ java -jar jar파일
 java -jar -Dspring.profiles.active=prod 배포파일.jar
 
 -> application-prod.properties
+
+WebMvcConfigurer 인터페이스
+
+Spring Data JPA
+
+Spring Security
