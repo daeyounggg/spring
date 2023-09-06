@@ -1,0 +1,352 @@
+상속
+내부 클래스
+1. 지역 내부 클래스
+지역 - 함수 내부
+
+인터페이스, 추상 클래스 -> 직접 객체 지역 내부에 생성
+
+인터페이스, 추상클래스가 객체가 되는 조건?
+1) 환경 - 지역 내부, 멤버 변수
+2) 객체가 될 수 없는 조건(추상 메서드)을 해소
+   - 추상 메서드의 구현체를 정의
+
+2. 익명 내부 클래스
+
+
+
+예외처리
+1. 오류와 예외
+오류(Error) : 시스템적인 오류(인프라 ...)
+	- 개발자가 통제 X
+
+예외(Exception) : 프로그램 소스상의 오류
+	- 개발자가 통제 O
+
+10 / 0 -> ArtithmethicException 발생
+
+2. 예외 클래스의 종류
+Throwable
+ Exception을 바로 상속 받는 예외
+  예) IOException - FileNotFoundException
+   - 예외의 확인이 컴파일 시점에 이뤄진다.
+   - 예외 발생시 컴파일 X (class 파일이 생성 X)
+   - 엄격한 예외, 형식을 매우 중시
+   - 예외가 발생하든 안하든 무조건 예외 처리
+
+ Exception
+  RuntimeException 상속받은 예외
+  예) ArtithmethicException 
+      NullPointerException
+         -> 참조 변수에 값이 null인 경우 메서드 호출시 발생 
+      - 예외가 발생 할 수 있더라도 컴파일 O -> class 파일이 생성
+      - 예외 확인이 실행중(Runtime)에 이뤄진다.
+      - 비교적 유연한 예외
+      - 컴파일은 됨 (예외가 되면 프로그램 중단)
+      - 예외처리를 하지않아도 됨
+
+java.exe -> 자바  class를 실행
+javac.exe -> java 파일 -> class 파일로 컴파일
+
+Throwable : 던질 수 있는 클래스
+  - Error
+
+  - Exception
+
+예외를 발생시키는 방법 -> 예외 던지기(Throwable를 상속 받은 클래스만)
+
+Trowalble 예외 객체 -> 예외 발생
+- 예외는 던질 수 있는 클래스(Throwable 하위 클래스만 가능).
+던지기(throw)를 해야 발생
+
+Throw 예외 객체 -> 예외발생
+
+예외
+Exception을 상속받은 예외 클래스
+   - 예외가 체크되는 시점 컴파일시 -> 예외가 있으면 컴파일 X
+   - class 파일이 생성 X
+   - 예) FileBotFoundException
+
+Exception - RuntimeException 상속 받은 예외 클래스
+   - 예외가 체크되는 시점 -> 실행시에 체크 된다.
+   - 실행을 하려면? 컴파일이 먼저 이뤄져야 가능(class 파일이 생성)
+   - 예외 확인 시점 : 실행시에 확인, 실행시 발생 -> 프로그램 중단
+   - 실행을 하려면? class 파일 필요 - 컴파일이 진행되어야 가능
+   - ArithmethicException, NullPointerException
+
+
+3. 예외 처리하기
+
+try{
+	
+	//예외가 발생할 가능성이 있는 코드
+
+}catch (예외 객체) {
+	
+	//예외에 대한 적절한 처리
+}
+
+예외 발생시 문제 해결을 위한 가장 중요한 내용 - 오류 발생의 원인, 정보
+Throwable : 예외의 정보를 확인하는 다양한 메서드가 정의
+Throwable 
+  - String getMessage() : 오른쪽문 확인
+  - void printStackTrace() : 오류의 자세한 원인을 발생 위치(파일명,라인번호) : 전파된 
+
+4. try-catch-finally문
+
+FileInputStream
+  - FileNotFoundException(Exception 형태의 엄격한 예외)
+  - 적절한 처리를 반드시 해야되는 예외가 정의
+
+try {
+  // 예외가 발생할 가능성 있는 코드
+  // 예외가 없으면 실행
+
+} catch(예외 객체){
+  // 예외가 발생 시 예외처리
+
+} finally{
+  // 예외가 발생하던 안하던 항상 유입되는 구간
+  // 함수 안에서 return한 이후라도 항상 수행
+  
+  // 주로 하는 작업
+     1) 자원해제
+     2) 로그 기록
+}
+
+
+5. try-with-resources문
+   - 자원해제를 자동으로 호출 - JDK 7버전
+  
+  try(자원해제가 필요한 객체;
+      자원해제가 필요한 객체) {
+
+  } catch (예외 객체...){ // 생략 가능
+  
+  }
+  ... finally{ // 생략가능
+  }
+
+
+AutoCloseable 인터페이스 구현 객체만 자원해제 해준다
+
+
+6. 예외 처리 미루기
+    - 예외 처리를 메서드를 호출하는 쪽에서 처리하도록 전가
+    메서드 정의 부분 throws 처리를 전가시키는 예외 클래스 명시
+    - 메서드를 사용하는 쪽에서 통제 가능하게 하기위해서
+    - 메서드에서 발생하는 예외를 처리하는 상황이 다양할때
+
+7. 다중 예외 처리
+
+try {
+  // 예외가 발생할 가능성 있는 코드
+  // 예외가 없으면 실행
+
+} catch(예외 객체1 | 예외 객체2){
+  // 예외가 발생 시 예외처리
+
+}
+
+8. 사용자 정의 예외
+- Exception, RuntimeException 이를 상속받은 하위 클래스 예외 상속
+- 생성자를 정의
+
+
+
+메서드를 사용하는 쪽에서 예외 처리를 다양하게 할때
+메서드쪽에 예외 전가 - throws
+
+try ~ catch ~ finally
+
+finally
+  - 예외가 발생하든 안하든 항상 실행되는 코드
+  - 자원해제
+  - 로그기록
+
+자원해제 -> try ~ with resources
+기준 1) AutoCloseable 인터페이스
+      2) close() 메서드를 자동 호출
+
+
+java.lang 패키지
+
+JDK - Java Development Kit
+- 자바에서 기본이 될 수 있는 클래스가 있는 패키지
+
+컴파일러가 자동 추가해주는 소스
+1. 기본 생성자(default 생성자)
+2. 생성자의 첫번째 줄 - super()
+3. 인터페이스 메서드 - public abstract
+4. 인터페이스 변수 - public static final : 정적 상수
+5. 지역 내부 클래스 지역변수 - 상수화 final
+6. 패키지명 바로 아래줄 import java.lang.*; 
+7. 상속을 정의하지 않은 모든 클래스 extends Object
+8. 객체의 참조 변수를 출력 -> toString이 부른다.
+
+Object 클래스
+1. Object 클래스에 정의된 메서드
+2. toString() 클래스
+
+
+참고)
+Class getClass() : 클래스의 정보가 담겨있는 객체를 반환
+	getName() : 클래스 이름(전체 클래스명 - 패키지명을 포함한 클래스명)
+ - 멤버변수의 값을 출력하는 값으로 많이 활용
+
+3. equals() 메서드
+
+ - Object의 기본 equals는 동일성 비교(주소 비교)
+
+ - 동일성 비교
+  == : 동일성 비교 / 동일한 객체 / 동일한 주소인지
+
+ - 동등성 비교 : 가치가 같은 객체인지
+  Object equals를 재정의를 통해서 동등성 비교로 구현
+
+4. hashCode() 메서드
+  - 객체의 주소값
+  - 동등한 객체이면 일반적으로 hashcode도 같게 정의
+  - java.util.Objects
+	 .util(...)
+
+  자료형... - 가변매개 변수
+
+집합자료 -> 중복이 없는 자료
+
+
+String 클래스
+-  문자열
+
+1. String을 선언하는 2가지 방법
+ String str = "ABC"; - 문자열 상수
+ String str = new String("ABC"); - 객체
+
+(자료형... ...) : 가변 매개변수
+
+- 산술연산자 + : 문자열 결합
+
+
+2. String 클래스의 final char[] 변수 - JDK12 이후 final byte[]
+   - 문자 여러개 (배열)
+   - 상수 : 변경 불가
+   - 문자의 불변성
+   - 변경이 필요하면 새로 객체가 생성(추가, 수정)
+   - 잦은 문자열 추가 수정, 삭제 발생 -> 성능 저하
+
+3. StringBuffer 와 StringBuilder 클래스 활용하기 
+
+  버퍼 -> 임시 메모리 공간 : 문자열을 임시로 추가  
+  
+  StringBuffer : 쓰레드 안정성 확보
+  StringBuilder : 쓰레드 안정성 X
+
+Wrapper 클래스
+
+Wrapper : 
+
+1. 기본 자료형을 위한 클래스
+2. Wrapper 클래스의 종류
+byte - Byte
+short - Short
+int - Integer
+long - Long
+
+float - Float
+double - Double
+
+char - Character
+boolean - Boolean
+
+class Integer {
+  ... 메서드, 상수, 변수
+
+  private final int value;
+
+  ... 메서드, 상수, 변수
+}
+
+연산 : 기본형 자료
+        동일한 자료형만 연산
+
+3.Integer 클래스 사용하기
+4. 오토박싱과 언박싱
+
+parse : 변환(문자열 -> 자바객체, 기본형)
+
+Integer
+ 	parseInt(...)
+
+
+유용한 클래스
+1. java.lang.Math
+  abs : 절대값
+  ceil : 올림
+  floor : 버림
+  round : 반올림
+  pow(double a,  double b) : a^b
+  sqrt
+  random : 0~1 미만의 랜덤 수(double)
+2. java.util.Objects
+ - hash(...)
+3. java.util.Random
+ 
+4. java.util.Scanner 
+ - 입력
+
+
+5. java.util.StringTokenizer
+
+
+String 클래스 편의 기능
+ - concat : 문자열 결합
+ - contains : 문자열 포함 여부
+ - char charAt : 특정 위치의 문자 반환
+ - endsWith(단어) : 단어로 끝나는 문자열
+ - startsWith(단어) : 단어로 시작하는 문자열
+ - static String format(형식,Object ... args) : 형식화 문자열로 반환
+ - indent(int n) : n 갯수만큼 공백 들여쓰기	
+ - indexOf("단어") : 단어가 문자열에 포함된 위치(0부터 ...) / 없는 경우는 -1 (왼쪽 -> 오른쪽)
+ - lastIndexOf("단어") : 단어가 문자열에 포함된 위치 (오른쪽 -> 왼쪽)
+ - static String format(형식, Object... args) : 형식화 문자열로 반환
+ - boolean isBank(문자열) : 공백 포함해서 빈문자인지 체크
+ - boolean isEmpty(문자열) : 빈 문자인지 체크
+ - static String join(CharSequence delim, CharSequence... words)
+ - trim("문자열") :  문자열 좌우 공백 제거
+
+ - int length() : 문자열 길이
+ - String repeat(int n) : n만큼 문자열 반복
+ - replace : 문자열 치환
+ - replaceAll
+ - String[] split
+ - toCharArray() : 문자 배열 반환
+ - substring(int begin) : begin 인덱스 이후 문자열
+ - substring(int begin, int end) : begin 이상, end 미만 문자열
+ - toUpperCase() : 소문자 -> 대문자
+ - toLowCase() : 대문자 -> 소문자
+
+ - valueOf("다양한 기본 자료형") : 문자열
+
+
+ 
+참고) 
+java.util 패키지
+
+  Objects
+  Arrays
+  Collections
+
+
+Class 클래스
+1. Class 클래스란?
+- 클래스의 정보가 담겨있는 클래스
+- 클래스 로더에 의해서 클래스 파일이 데이터 영역에 구성될때 생성
+
+2. Class 클래스를 선언하고 클래스 정보를 가져오는 방법
+1) 모든 클래스의 정적변수 class로 조회 - 객체생성없이 클래스명으로 바로 조회
+2) Object 클래스의 getClass() - 객체생성 이후 조회가능
+3) Class.forName(클래스명); - 동적으로 클래스를 데이터 영역에 로드, 클래스 객체 생성
+
+3. Class 클래스를 활용해 클래스 정보 알아보기
+4. Class.forName()을 사용해 동적 로딩하기
+ - 실행 중에 동적으로 데이터 영역에 클래스를 로드
+ - 반환값으로 Class 클래스 객체 반환

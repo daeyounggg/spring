@@ -1,0 +1,20 @@
+package exam02;
+
+public class ex07 {
+    public static void main(String[] args){
+        try {
+            int num1 = 10;
+            int num2 = 2;
+            int result = num1 / num2; // ArithmethicException
+
+            String str = null;
+            str.toUpperCase(); // NullPointerException
+        }catch (ArithmeticException e){
+            System.out.println(e.getMessage());
+        }catch(NullPointerException e ){
+            System.out.println(e.getMessage());
+        }catch(RuntimeException e){// 발생할 예외가 명확하게 잘 모르는 경우 -> 다형성
+            System.out.println(e.getMessage());
+        }
+    }
+}
