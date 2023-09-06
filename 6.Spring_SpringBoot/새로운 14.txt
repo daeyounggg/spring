@@ -57,7 +57,22 @@ JPQL  : Java Persistence Query Language
 @IdClass
 
 - 기본생성자, 멤버 변수를 초기화하는 생성자 
+- equals() and hashcode()
 
 4. Repository 설계하기
+JpaRepository 인터페이스를 상속 -> 구현 객체가 자동 생성 
+
+- Dao 안 만듬
+
+S findOne(...)
+List<S> findAll(...)
+S save(S entity) : EntityManager::persist(..)
+S saveAndFlush(S entity) : -> save() + flush()
+List<S> saveAll(Collection<S> entity):
+List<S> saveAllAndFlush(Collection<S> entity) 
+void delete(S entity) : EntityManager::remove(...)
+long count(...)
+void flush()
+
 
 5. 쿼리 메서드
