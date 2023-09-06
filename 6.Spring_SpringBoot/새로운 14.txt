@@ -53,6 +53,11 @@ JPQL  : Java Persistence Query Language
 	- 상속 
 	- @MappedSuperclass
 
+3) 기본키(Primary Key) 여러개 조합해서 생성
+@IdClass
+
+- 기본생성자, 멤버 변수를 초기화하는 생성자 
+
 4. Repository 설계하기
 
 5. 쿼리 메서드
