@@ -13,8 +13,7 @@ import java.util.Date;
 @Table(name="es_member")
 @Data @Builder
 @AllArgsConstructor @NoArgsConstructor
-
-public class Member {
+public class Member extends BaseEntity {
     @Id @GeneratedValue
     private Long userNo;
 
@@ -32,12 +31,6 @@ public class Member {
 
     @Enumerated(EnumType.STRING) // enum 함수
     private Role role;
-
-    @CreationTimestamp
-    private LocalDateTime regDt;
-
-    @UpdateTimestamp
-    private LocalDateTime modDt;
 
     /**
     @Temporal(TemporalType.TIMESTAMP)
