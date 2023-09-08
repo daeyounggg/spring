@@ -102,4 +102,11 @@ public class Ex05 {
     void test5(){
         List<BoardData> items = infoService.getList();
     }
+
+    @Test
+    void test6(){
+        Member member = memberRepository.findByUserId("user01");
+        memberRepository.delete(member);
+        memberRepository.flush();
+    }
 }
