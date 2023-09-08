@@ -64,7 +64,7 @@ JpaRepository 인터페이스를 상속 -> 구현 객체가 자동 생성
 
 - Dao 안 만듬
 
-S findOne(...)
+List<S> findById(...)
 List<S> findAll(...)
 S save(S entity) : EntityManager::persist(..)
 S saveAndFlush(S entity) : -> save() + flush()

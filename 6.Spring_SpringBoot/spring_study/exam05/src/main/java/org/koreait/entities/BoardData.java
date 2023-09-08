@@ -1,15 +1,12 @@
 package org.koreait.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data @Builder
 @NoArgsConstructor @AllArgsConstructor
-public class BoardData extends BaseEntity{
+public class BoardData extends BaseEntity {
     @Id @GeneratedValue
     private Long id;
 
@@ -20,4 +17,8 @@ public class BoardData extends BaseEntity{
     @Column(nullable = false)
     private String content;
 
+    @ManyToOne
+    @JoinColumn(name="userNo")
+    @ToString.Exclude
+    private Member member;
 }
