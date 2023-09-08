@@ -30,10 +30,10 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member") // 관계주인 명시
+    @OneToMany(mappedBy = "member", fetch=FetchType.LAZY) // 관계주인 명시
     private List<BoardData> boardDatas = new ArrayList<>();
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="addressId")
     @ToString.Exclude
     private Address address;
