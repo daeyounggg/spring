@@ -97,7 +97,7 @@ BooleanBuilder --> Predicate
 
 8. 연관 관계 매핑
 1) @ManyToOne 
-	- 다대일
+	- 다 : 1
 	- 게시글(Many)  - 회원(One)
 	- Many쪽 테이블 외래키가 등록 
 	
@@ -105,7 +105,7 @@ BooleanBuilder --> Predicate
 	@JoinColumn(name="외래키명")
 	
 2) @OneToMany
-	- 일대다 
+	- 1 : 다 
 	- 회원(One) - 게시글(Many)
 	- 연관 관계의 주인을 명시 (mappedby)
 	
@@ -124,7 +124,15 @@ BooleanBuilder --> Predicate
 						2) @ToString.Exclude : 순환참조가 발생하는 필드에 적용 
 						
 3) @OneToOne : 1:1매핑
-4) @ManyToMany : 다대다
+
+4) @ManyToMany : 다 : 다
+
+	해시코드 - 게시글
+	
+	코드1 - 게시글1, 게시글2, 게시글3
+	
+	게시글1 - 코드1, 코드2, 코드3
+
 
 9. 영속성 전이
 

@@ -22,4 +22,8 @@ public class Address {
     @Column(length = 100)
     private String addressSub;
 
+    @OneToOne(mappedBy = "address")
+    private Member member;
+
+
 }
