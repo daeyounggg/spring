@@ -33,6 +33,6 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member") // 관계주인 명시
     private List<BoardData> boardDatas = new ArrayList<>();
 }
