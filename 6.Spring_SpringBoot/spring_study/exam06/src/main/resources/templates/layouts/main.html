@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title th:if="${pageTitle != null}" th:text="${pageTitle}"></title>
@@ -13,11 +13,11 @@
     <script th:each="file : ${addScript}" th:src="@{/js/{jsFile}.js(jsFile=${file})}"></script>
     <th:block layout:fragment="addScript"></th:block>
 </head>
-<body>
-    <header th:replace="~{outlines/header::common}"></header>
+    <body>
+        <header th:replace="~{outlines/header::common}"></header>
 
-    <main layout:fragment="content"></main>
+        <main layout:fragment="content"></main>
 
-    <footer th:replace="~{outlines/footer::common}"></footer>
-</body>
+        <footer th:replace="~{outlines/footer::common}"></footer>
+    </body>
 </html>
