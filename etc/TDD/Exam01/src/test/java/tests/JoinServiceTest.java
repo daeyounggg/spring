@@ -1,6 +1,7 @@
 package tests;
 
 import commons.BadRequestException;
+import models.member.DuplicateUserIdException;
 import models.member.JoinService;
 import models.member.Member;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,16 +40,50 @@ public class JoinServiceTest {
     @Test
     @DisplayName("필수항목(userId, userNm, userPw) 체크, 필수 항목 누락시 BadRequestException 발생")
     void requiredFieldsTest() {
-        /** userId의 필수 여부 - null, 빈값이면 예외 발생 */
-        assertThrows(BadRequestException.class, () -> {
+        assertAll(
+                () -> requiredFieldEachTest("userId","아이디"),
+                () -> requiredFieldEachTest("userPw", "비밀번호"),
+                () -> requiredFieldEachTest("userNm", "회원명")
+        );
+    }
+
+    @Test
+    @DisplayName("중복 userId로 가입한 경우 DuplicateUserIdException 발생")
+    void duplicateUserIdTest(){
+        assertThrows(DuplicateUserIdException.class, () -> {
             Member member = getMember();
+            joinService.join(member);
+            joinService.join(member);
+        });
+    }
+
+
+    private void requiredFieldEachTest(String field, String word){
+        Member member = getMember();
+        if ( field.equals("userId")){
             member.setUserId(null);
+        } else if ( field.equals("userPw")){
+            member.setUserPw(null);
+        } else if ( field.equals("userNm")){
+            member.setUserNm(null);
+        }
+        BadRequestException thrown = assertThrows(BadRequestException.class, ()-> {
             joinService.join(member);
         });
-        assertThrows(BadRequestException.class, () -> {
-            Member member = getMember();
-            member.setUserId("    ");
+
+        assertTrue(thrown.getMessage().contains(word));
+
+        if ( field.equals("userId")){
+            member.setUserId("   ");
+        } else if ( field.equals("userPw")){
+            member.setUserPw("   ");
+        } else if ( field.equals("userNm")){
+            member.setUserNm("   ");
+        }
+        BadRequestException thrown2 = assertThrows(BadRequestException.class, ()-> {
             joinService.join(member);
         });
+
+        assertTrue(thrown2.getMessage().contains(word));
     }
 }
