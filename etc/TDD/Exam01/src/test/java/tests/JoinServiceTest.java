@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("회원가입기능 테스트")
 public class JoinServiceTest {
 
     private JoinService joinService;
