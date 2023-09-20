@@ -1,4 +1,4 @@
-package exam02.exam02;
+package org.koreait;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
